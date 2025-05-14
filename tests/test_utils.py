@@ -19,3 +19,4 @@ def test_data_transactions_invalid_format(tmp_path):
     path.write_text("not json", encoding="utf-8")
     with pytest.raises(Exception):  # можно конкретно JSONDecodeError
         data_transactions(str(path))
+        #Переписаны две функции из-за конфликтов

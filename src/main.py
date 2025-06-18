@@ -8,7 +8,8 @@ from src.utils.xlsx_reader import load_transactions
 from src.views import main_view
 
 # Загружаем данные
-transactions = cast(list[dict[str, Any]], load_transactions().to_dict(orient="records"))
+transactions_df = load_transactions()
+transactions = cast(list[dict[str, Any]], transactions_df.to_dict(orient="records"))
 
 if __name__ == "__main__":
     print("Веб-страница:")
@@ -18,4 +19,4 @@ if __name__ == "__main__":
     print(simple_search("оплата", transactions))
 
     print("\nОтчёт (траты по категориям):")
-    print(spending_by_category())
+    print(spending_by_category(transactions_df, "Кафе", "2021-12-17 01:02:03"))

@@ -9,11 +9,22 @@ from src.utils.xlsx_reader import load_transactions
 logger = logging.getLogger(__name__)
 
 
-def spending_by_category() -> pd.DataFrame:
-    """Возвращает сумму трат по категориям из таблицы операций."""
-    logger.info("Генерация отчета: траты по категориям")
-    df = load_transactions()
+def spending_by_category(
+    df: pd.DataFrame,
+    category: str,
+    date_time: str | None = None,
+) -> pd.DataFrame:
+    """Возвращает сумму трат по указанной категории."""
+    logger.info("Генерация отчета: траты по категории")
+    df = df[df["Категория"] == category]
     df = df[df["Сумма операции"] < 0]
+
+    if date_time is not None:
+        end_date = pd.to_datetime(date_time)
+        start_date = end_date.replace(day=1, hour=0, minute=0, second=0)
+        op_dates = pd.to_datetime(df["Дата операции"], dayfirst=True)
+        df = df[(op_dates >= start_date) & (op_dates <= end_date)]
+
     result = df.groupby("Категория")["Сумма операции"].sum().sort_values()
     return result.to_frame(name="Сумма операции")
 

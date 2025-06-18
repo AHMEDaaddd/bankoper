@@ -1,7 +1,7 @@
-from src.views import get_greeting
-from unittest.mock import patch
-from src.views import main_view
 import json
+from unittest.mock import patch
+
+from src.views import get_greeting, main_view
 
 
 def test_get_greeting():

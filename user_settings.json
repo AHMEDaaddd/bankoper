@@ -1,4 +1,4 @@
 {
-  "currency": "RUB",
-  "api_key": "your_actual_key_here"
+  "user_currencies": ["USD", "EUR"],
+  "user_stocks": ["AAPL", "GOOGL"]
 }

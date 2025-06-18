@@ -13,7 +13,10 @@ def main_view(date_time: str) -> str:
     """Формирует JSON-ответ с данными: приветствие, карты, топ транзакций, валюты и акции."""
     logger.info("Loading transactions...")
     df = load_transactions()
-    df = df[pd.to_datetime(df["Дата операции"], dayfirst=True) <= pd.to_datetime(date_time)]
+    op_dates = pd.to_datetime(df["Дата операции"], dayfirst=True)
+    end_date = pd.to_datetime(date_time)
+    start_date = end_date.replace(day=1, hour=0, minute=0, second=0)
+    df = df[(op_dates <= end_date) & (op_dates >= start_date)]
 
     logger.info("Generating greeting...")
     greeting = get_greeting(date_time)

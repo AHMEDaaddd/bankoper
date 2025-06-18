@@ -34,13 +34,13 @@ poetry run pytest
 │   ├── reports.py          # Отчёты
 │   └── utils/              # Вспомогательные модули
 ├── tests/                  # Pytest-тесты
-├── .env_template           # Шаблон переменных окружения
+├── .env.example           # Шаблон переменных окружения
 ├── pyproject.toml          # Настройки Poetry и зависимостей
 ```
 
 ## 🔐 Переменные окружения
 
-См. файл `.env_template`.
+См. файл `.env.example`.
 
 ## 🧪 Тесты
 

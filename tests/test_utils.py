@@ -1,10 +1,11 @@
+from unittest.mock import mock_open, patch
+
 import pandas as pd
-from src.utils.api_client import get_currency_rates
+
 from src.user_settings import get_user_settings
-from src.utils.xlsx_reader import load_transactions
-import pytest
-from unittest.mock import patch, mock_open
+from src.utils.api_client import get_currency_rates
 from src.utils.views_helpers import get_top_transactions
+from src.utils.xlsx_reader import load_transactions
 
 
 def test_load_transactions():
@@ -24,10 +25,7 @@ def test_get_top_transactions_logic(mock_df, sample_df):
 
 @patch("requests.get")
 def test_get_currency_rates(mock_get):
-    mock_get.return_value.json.return_value = {
-        "rates": {"USD": 90.5, "EUR": 98.1},
-        "base": "RUB"
-    }
+    mock_get.return_value.json.return_value = {"rates": {"USD": 90.5, "EUR": 98.1}, "base": "RUB"}
     mock_get.return_value.status_code = 200
     result = get_currency_rates()
     assert any(x["currency"] == "USD" for x in result)

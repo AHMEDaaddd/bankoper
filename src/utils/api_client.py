@@ -39,7 +39,7 @@ def get_stock_prices() -> List[Dict[str, float]]:
     results = []
 
     for stock in stocks:
-        url = f"https://www.alphavantage.co/query"
+        url = "https://www.alphavantage.co/query"
         params = {"function": "GLOBAL_QUOTE", "symbol": stock, "apikey": api_key}
         try:
             response = requests.get(url, params=params, timeout=5)
